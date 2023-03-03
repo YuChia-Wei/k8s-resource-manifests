@@ -1,0 +1,10 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: elasticsearch
+spec:
+  host: "elasticsearch-es-http.elastic-system.svc.cluster.local"
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+      credentialName: ekmnt-elasticsearch-cert

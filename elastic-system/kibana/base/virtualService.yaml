@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: elastic-system-vs
+  namespace: elastic-system
+spec:
+  gateways:
+    - elastic-kibana-gateway
+    # - mesh
+  hosts:
+    - kibana.mydomain.org
+    # - kibana-kb-http.elastic-system.svc.cluster.local
+    # - kibana-kb-http.elastic-system.svc
+    # - kibana-kb-http
+  http:
+    # - headers:
+    #     request:
+    #       set:
+    #         x-forwarded-proto: https
+    - route:
+        - destination:
+            host: kibana-kb-http.elastic-system.svc.cluster.local
+            port:
+              number: 5601

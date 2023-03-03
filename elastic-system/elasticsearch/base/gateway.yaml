@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: elasticsearch-gateway
+  namespace: elastic-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - "elasticsearch.mydomain.org"
+      port:
+        name: http-es
+        number: 80
+        protocol: HTTP
+      tls:
+        mode: SIMPLE
+        credentialName: ekmnt-elasticsearch-cert

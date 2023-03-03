@@ -1,0 +1,38 @@
+apiVersion: agent.k8s.elastic.co/v1alpha1
+kind: Agent
+metadata:
+  name: elastic-agent
+  namespace: elastic-system
+spec:
+  version: 8.6.2
+  kibanaRef:
+    name: kibana
+  fleetServerRef:
+    name: fleet-server
+  mode: fleet
+  daemonSet:
+    podTemplate:
+      spec:
+        serviceAccountName: elastic-agent
+        automountServiceAccountToken: true
+        securityContext:
+          runAsUser: 0
+        containers:
+        - name: agent
+          volumeMounts:
+          - mountPath: /var/lib/docker/containers
+            name: varlibdockercontainers
+          - mountPath: /var/log/containers
+            name: varlogcontainers
+          - mountPath: /var/log/pods
+            name: varlogpods
+        volumes:
+        - name: varlibdockercontainers
+          hostPath:
+            path: /var/lib/docker/containers
+        - name: varlogcontainers
+          hostPath:
+            path: /var/log/containers
+        - name: varlogpods
+          hostPath:
+            path: /var/log/pods
