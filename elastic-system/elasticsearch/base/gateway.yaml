@@ -10,9 +10,9 @@ spec:
     - hosts:
         - "elasticsearch.mydomain.org"
       port:
-        name: http-es
-        number: 80
-        protocol: HTTP
+        name: https-es
+        number: 443
+        protocol: HTTPs
       tls:
         mode: SIMPLE
-        credentialName: ekmnt-elasticsearch-cert
+        credentialName: elasticsearch-es-http-certs-internal

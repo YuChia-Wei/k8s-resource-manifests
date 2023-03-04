@@ -7,4 +7,4 @@ spec:
   trafficPolicy:
     tls:
       mode: SIMPLE
-      credentialName: ekmnt-elasticsearch-cert
+      credentialName: elasticsearch-es-http-certs-internal
