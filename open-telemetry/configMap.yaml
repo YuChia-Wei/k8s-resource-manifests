@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-collector-config
+data:
+  config.yaml: |-
+    receivers:
+      # https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver
+      otlp:
+        protocols:
+          grpc:
+            #endpoint: otel-collector.kube-monitor.svc.cluster.local:4317
+            endpoint: 0.0.0.0:4317
+          http:
+            #endpoint: otel-collector.kube-monitor.svc.cluster.local:4318
+            endpoint: 0.0.0.0:4318
+
+    exporters:
+      # https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/loggingexporter/README.md
+      logging:
+        verbosity: normal
+
+      # https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/lokiexporter/README.md
+      loki:
+        endpoint: http://loki-gateway.kube-monitor.svc.cluster.local/loki/api/v1/push
+        tls:
+          insecure: true
+
+      # https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/otlpexporter/README.md
+      otlp/tempo:
+        endpoint: http://tempo-distributor.kube-monitor.svc.cluster.local:4317
+        tls:
+          insecure: true
+
+      otlp/elastic:
+        # endpoint: https://apm.elastic-system.svc.cluster.local:8200
+        # endpoint: https://apm.elastic-system.svc:8200
+        endpoint: http://apm.elastic-system.svc:8200
+        headers:
+          # should be replace to your elastic-agent token
+          Authorization: "Bearer <token>"
+        tls:
+          insecure: true
+
+    processors:
+      memory_limiter:
+        check_interval: 1s
+        limit_mib: 2000
+
+      batch:
+
+      # for tempo
+      resource:
+        attributes:
+          - action: insert
+            key: service_name
+            from_attribute: service.name
+          - action: insert
+            key: service_env
+            from_attribute: service.env
+          - action: insert
+            key: service_namespace
+            from_attribute: service.namespace
+          - action: insert
+            key: service_version
+            from_attribute: service.version
+          - action: insert
+            key: loki.resource.labels
+            value: service_name, service_env, service_namespace, service_version
+
+    service:
+      pipelines:
+        # logs:
+        #   receivers: [otlp]
+        #   processors: [resource, attributes]
+        #   exporters: [loki]
+        logs:
+          receivers: [otlp]
+          processors: []
+          exporters: [logging, otlp/elastic]
+        traces:
+          receivers: [otlp]
+          processors: []
+          exporters: [logging, otlp/elastic]
