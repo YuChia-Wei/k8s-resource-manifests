@@ -29,8 +29,18 @@ spec:
       selfSignedCertificate:
         disabled: true
   config:
-    xpack.fleet.agents.elasticsearch.hosts: ["https://elasticsearch-es-http.elastic-system.svc.cluster.local:9200"]
-    xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server-agent-http.elastic-system.svc.cluster.local:8220"]
+    # elastic operator 簽發的憑證路徑為以下路徑，如果沒有關掉 TLS 的話，會需要使用這些路徑
+    # elasticsearch-es-http.elastic-system.es.local
+    # elasticsearch-es-http
+    # elasticsearch-es-http.elastic-system.svc
+    # elasticsearch-es-http.elastic-system
+    # elasticsearch-es-internal-http.elastic-system.svc
+    # elasticsearch-es-internal-http.elastic-system
+    # *.elasticsearch-es-default.elastic-system.svc
+    xpack.fleet.agents.elasticsearch.hosts: ["https://elasticsearch-es-http.elastic-system.svc:9200"]
+    # xpack.fleet.agents.elasticsearch.hosts: ["https://elasticsearch-es-http.elastic-system.svc.cluster.local:9200"]
+    xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server-agent-http.elastic-system:8220"]
+    # xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server-agent-http.elastic-system.svc.cluster.local:8220"]
     xpack.fleet.packages:
     - name: system
       version: latest

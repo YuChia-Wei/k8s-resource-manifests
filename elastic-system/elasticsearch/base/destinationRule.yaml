@@ -3,7 +3,8 @@ kind: DestinationRule
 metadata:
   name: elasticsearch
 spec:
-  host: "elasticsearch-es-http.elastic-system.svc.cluster.local"
+  # host: "elasticsearch-es-http.elastic-system.svc.cluster.local"
+  host: "elasticsearch-es-http.elastic-system.svc"
   trafficPolicy:
     tls:
       mode: SIMPLE
