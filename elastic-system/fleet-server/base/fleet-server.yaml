@@ -4,10 +4,10 @@ metadata:
   name: fleet-server
   namespace: elastic-system
 spec:
-  http:
-    tls:
-      selfSignedCertificate:
-        disabled: true
+  # http:
+  #   tls:
+  #     selfSignedCertificate:
+  #       disabled: true
   version: 8.6.2
   kibanaRef:
     name: kibana
