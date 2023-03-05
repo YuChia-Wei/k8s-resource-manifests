@@ -8,4 +8,6 @@ spec:
   trafficPolicy:
     tls:
       mode: SIMPLE
+      # 不確定要用哪個..
       credentialName: elasticsearch-es-http-certs-internal
+      # credentialName: elasticsearch-es-http-ca-internal
