@@ -1,0 +1,11 @@
+apiVersion: telemetry.istio.io/v1alpha1
+kind: Telemetry
+metadata:
+  name: mesh-default
+  namespace: istio-system
+spec:
+  accessLogging:
+    - providers:
+        - name: Envoy
+      filter:
+        expression: "request.url_path != '/status' && request.url_path != '/liveness' && request.url_path != '/readiness' && request.url_path != '/health'"
