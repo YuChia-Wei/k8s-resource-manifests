@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: rancher-vs
+  namespace: cattle-system
+spec:
+  gateways:
+    - rancher-gateway
+  hosts:
+    - "*.mshome.net"
+  http:
+    - headers:
+        request:
+          set:
+            x-forwarded-proto: https
+      route:
+        - destination:
+            host: rancher.cattle-system.svc.cluster.local
+            port:
+              number: 80
+  tls:
+    - match:
+      - port: 443
+        sniHosts:
+        - k8s-ubuntu-containerd.mshome.net
+      route:
+      - destination:
+          host: rancher.cattle-system.svc.cluster.local
+          port:
+            number: 80

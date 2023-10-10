@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: rancher-gateway
+  namespace: cattle-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - k8s-ubuntu-containerd.mshome.net
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+    - port:
+        number: 443
+        name: https-443
+        protocol: HTTPS
+      hosts:
+        - k8s-ubuntu-containerd.mshome.net
+      tls:
+        # mode: PASSTHROUGH
+        mode: SIMPLE
+        credentialName: ingress-cert
