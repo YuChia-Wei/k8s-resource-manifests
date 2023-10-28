@@ -5,9 +5,9 @@ metadata:
   namespace: istio-system
 spec:
   secretName: ingress-cert
-  commonName: k8s-ubuntu-containerd.mshome.net
+  commonName: rancher.mydomain.org
   dnsNames:
-  - k8s-ubuntu-containerd.mshome.net
+  - rancher.mydomain.org
   # Issuer references are always required.
   issuerRef:
     name: ca-issuer

@@ -8,7 +8,7 @@ spec:
     istio: ingressgateway
   servers:
     - hosts:
-        - k8s-ubuntu-containerd.mshome.net
+        - rancher.mydomain.org
       port:
         name: http
         number: 80
@@ -18,8 +18,8 @@ spec:
         name: https-443
         protocol: HTTPS
       hosts:
-        - k8s-ubuntu-containerd.mshome.net
+        - rancher.mydomain.org
       tls:
         # mode: PASSTHROUGH
         mode: SIMPLE
-        credentialName: ingress-cert
+        credentialName: cattle-system/tls-rancher-ingress

@@ -7,7 +7,7 @@ spec:
   gateways:
     - rancher-gateway
   hosts:
-    - "*.mshome.net"
+    - rancher.mydomain.org
   http:
     - headers:
         request:
@@ -22,9 +22,9 @@ spec:
     - match:
       - port: 443
         sniHosts:
-        - k8s-ubuntu-containerd.mshome.net
+        - rancher.mydomain.org
       route:
       - destination:
           host: rancher.cattle-system.svc.cluster.local
           port:
-            number: 80
+            number: 443
