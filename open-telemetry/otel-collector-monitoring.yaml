@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: otel-collector-monitoring
+spec:
+  endpoints:
+  - interval: 15s
+    path: /metrics
+    port: http-metrics-exporter
+  namespaceSelector:
+    matchNames:
+    - kube-monitor
+  selector:
+    matchLabels:
+      component: otel-collector
