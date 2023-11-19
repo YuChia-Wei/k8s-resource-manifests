@@ -8,7 +8,7 @@ spec:
   elasticsearchRef:
     name: elasticsearch
     # namespace: elastic-system
-  version: 8.6.2
+  version: 8.11.1
   podTemplate:
     spec:
       # automountServiceAccountToken: true
