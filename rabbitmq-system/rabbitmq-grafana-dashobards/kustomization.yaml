@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: rabbitmq-system
+resources:
+  - erlang-distribution.yaml
+  - erlang-distributions-compare.yaml
+  - erlang-memory-allocators.yaml
+  - rabbitmq-alerts.yaml
+  - rabbitmq-overview.yaml
+  - rabbitmq-queue.yaml
+  - rabbitmq-quorum-queues-raft.yaml
+  - rabbitmq-stream.yaml

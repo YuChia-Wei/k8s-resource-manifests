@@ -1,0 +1,54 @@
+#reference https://www.rabbitmq.com/kubernetes/operator/using-operator.html
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  labels:
+    app: rabbitmq-cluster
+  name: rabbitmq-cluster
+spec:
+  # image tag can find from https://hub.docker.com/_/rabbitmq/tags
+  image: rabbitmq:3.12.9-management
+  replicas: 3
+  override:
+    statefulSet:
+      spec:
+        template:
+          spec:
+            containers:
+            - name: rabbitmq
+              volumeMounts:
+              - mountPath: /etc/rabbitmq/rabbitmq_definitions.json
+                subPath: rabbitmq_definitions.json # Name of the ConfigMap field containing definitions
+                name: definitions
+            volumes:
+            - name: definitions
+              configMap:
+                name: rabbitmq-definitions-configmap
+                # name: rabbitmq_definitions.json # Name of the ConfigMap which contains definitions you wish to import
+
+  # this resources is default value
+  resources:
+    requests:
+      cpu: '1'
+      memory: 2Gi
+    limits:
+      cpu: '1'
+      memory: 2Gi
+
+  persistence:
+    # use k8s default storage class when not settled
+    # storageClassName: longhorn
+    storage: 5Gi
+
+  # rabbitmq:
+  #   additionalConfig: |
+  #     load_definitions = /etc/rabbitmq/rabbitmq_definitions.json # Path to the mounted definitions file
+  # 如果還沒有設定檔，可以先用這樣的預設帳號來登入，資料設定完並匯出設定檔後，就可以統一使用設定檔作為服務啟動時的預設值了
+  rabbitmq:
+    additionalConfig: |
+      default_user=admin
+      default_pass=strongpassword
+    # RabbitMQ Plugin
+    additionalPlugins:
+      - rabbitmq_federation
+      - rabbitmq_federation_management
