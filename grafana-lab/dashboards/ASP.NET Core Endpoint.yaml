@@ -2,8 +2,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: asp-net-core-dashboard
+  name: asp-net-core-endpoint-dashboard
   labels:
     grafana_dashboard: "true"
 data:
-  asp-net-core-dashboard.json.url: "https://raw.githubusercontent.com/JamesNK/aspnetcore-grafana/main/dashboards/ASP.NET%20Core.json"
+  asp-net-core-endpoint-dashboard.json.url: "https://raw.githubusercontent.com/dotnet/aspire/main/src/Grafana/dashboards/aspnetcore-endpoint.json"
