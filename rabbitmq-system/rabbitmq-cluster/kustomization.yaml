@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: rabbitmq-system
 resources:
   - rabbitmq-cluster.yaml
-  - rabbitmq-prometheus-monitor.yml
+  - rabbitmq-prometheus-monitor.yaml
 # configMapGenerator:
 #   - name: rabbitmq-definitions-configmap
 #     files:
