@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: otel-collector
+resources:
+  - otel-collector-config.yaml
+  - otel-collector-deployment.yaml
+  - otel-collector-monitoring.yaml
+  - otel-collector-service.yaml

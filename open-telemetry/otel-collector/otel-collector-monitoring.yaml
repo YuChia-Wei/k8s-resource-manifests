@@ -9,7 +9,7 @@ spec:
     port: http-metrics-exporter
   namespaceSelector:
     matchNames:
-    - kube-monitor
+    - open-telemetry
   selector:
     matchLabels:
       component: otel-collector

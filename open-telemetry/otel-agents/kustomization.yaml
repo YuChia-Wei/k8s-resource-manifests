@@ -3,10 +3,5 @@ kind: Kustomization
 namespace: otel-collector
 resources:
   # agent 的實際用法待研究，官方 otel collector 範例有部署，但是沒有 service 可以進入容器
-  # - otel-agent-config.yaml
-  # - otel-agent-daemonSet.yaml
-  - otel-collector-config.yaml
-  - otel-collector-deployment.yaml
-  - otel-collector-service.yaml
-  # - gateway.yaml
-  # - virtualService.yaml
+  - otel-agent-config.yaml
+  - otel-agent-daemonSet.yaml
