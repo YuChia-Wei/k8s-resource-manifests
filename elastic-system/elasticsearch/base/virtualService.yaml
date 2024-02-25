@@ -8,7 +8,7 @@ spec:
     - elasticsearch-gateway
     - mesh
   hosts:
-    - elasticsearch.mydomain.org
+    - elasticsearch.local.vm
     - elasticsearch-es-http.elastic-system.svc.cluster.local
     - elasticsearch-es-http.elastic-system.svc
     - elasticsearch-es-http

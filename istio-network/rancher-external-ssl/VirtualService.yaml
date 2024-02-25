@@ -7,7 +7,7 @@ spec:
   gateways:
     - rancher-gateway
   hosts:
-    - rancher.mydomain.org
+    - my-rancher.local.vm
   http:
     - headers:
         request:

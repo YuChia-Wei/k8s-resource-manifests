@@ -5,9 +5,9 @@ metadata:
   namespace: istio-system
 spec:
   secretName: ingress-cert
-  commonName: rancher.mydomain.org
+  commonName: my-rancher.local.vm
   dnsNames:
-  - rancher.mydomain.org
+  - my-rancher.local.vm
   # Issuer references are always required.
   issuerRef:
     name: ca-issuer

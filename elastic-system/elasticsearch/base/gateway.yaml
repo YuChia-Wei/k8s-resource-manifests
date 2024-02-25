@@ -8,7 +8,7 @@ spec:
     istio: ingressgateway
   servers:
     - hosts:
-        - "elasticsearch.mydomain.org"
+        - "elasticsearch.local.vm"
       port:
         name: https-es
         number: 443

@@ -7,7 +7,7 @@ spec:
   gateways:
     - grafana-gateway
   hosts:
-    - grafana.mydomain.org
+    - grafana.local.vm
   http:
     - route:
         - destination:

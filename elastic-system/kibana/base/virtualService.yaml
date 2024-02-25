@@ -8,7 +8,7 @@ spec:
     - elastic-kibana-gateway
     # - mesh
   hosts:
-    - kibana.mydomain.org
+    - kibana.local.vm
     # - kibana-kb-http.elastic-system.svc.cluster.local
     # - kibana-kb-http.elastic-system.svc
     # - kibana-kb-http

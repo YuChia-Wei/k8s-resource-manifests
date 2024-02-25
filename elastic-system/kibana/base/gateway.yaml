@@ -8,7 +8,7 @@ spec:
     istio: ingressgateway
   servers:
     - hosts:
-        - kibana.mydomain.org
+        - kibana.local.vm
       port:
         name: http
         number: 80

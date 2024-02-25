@@ -7,7 +7,7 @@ spec:
   gateways:
     - rancher-gateway
   hosts:
-    - rancher.mydomain.org
+    - my-rancher.local.vm
   http:
     - headers:
         request:
@@ -22,7 +22,7 @@ spec:
     - match:
       - port: 443
         sniHosts:
-        - rancher.mydomain.org
+        - my-rancher.local.vm
       route:
       - destination:
           host: rancher.cattle-system.svc.cluster.local
