@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: otel-collector-config
+  name: otel-collector-conf
   labels:
     app: opentelemetry
     component: otel-collector-conf
 data:
-  otel-collector-config: |
+  otel-collector-config.yaml: |
     receivers:
       # https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver
       otlp:
@@ -86,8 +86,10 @@ data:
         logs:
           receivers: [otlp]
           processors: []
-          exporters: [logging, otlp/elastic]
+          # exporters: [logging, otlp/elastic]
+          exporters: [loki]
         traces:
           receivers: [otlp]
           processors: []
-          exporters: [logging, otlp/elastic]
+          # exporters: [logging, otlp/elastic]
+          exporters: [otlp/tempo]

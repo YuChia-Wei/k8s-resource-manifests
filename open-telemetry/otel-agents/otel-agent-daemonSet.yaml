@@ -17,10 +17,8 @@ spec:
         component: otel-agent
     spec:
       containers:
-      - command:
-          - "/otelcol"
-          - "--config=/conf/otel-agent-config.yaml"
-        image: otel/opentelemetry-collector-contrib:0.96.0
+      - args: ["--config", "/conf/otel-collector-config.yaml"]
+        image: otel/opentelemetry-collector-contrib:0.105.0
         name: otel-agent
         resources:
           limits:
@@ -40,12 +38,9 @@ spec:
                 apiVersion: v1
                 fieldPath: status.podIP
         volumeMounts:
-        - name: otel-agent-config-vol
-          mountPath: /conf
+          - name: otel-agent-conf
+            mountPath: /conf
       volumes:
         - configMap:
             name: otel-agent-conf
-            items:
-              - key: otel-agent-config
-                path: otel-agent-config.yaml
-          name: otel-agent-config-vol
+          name: otel-agent-conf

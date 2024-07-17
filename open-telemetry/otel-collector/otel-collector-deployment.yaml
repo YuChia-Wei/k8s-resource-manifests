@@ -20,10 +20,8 @@ spec:
         component: otel-collector
     spec:
       containers:
-      - command:
-          - "/otelcol"
-          - "--config=/conf/otel-collector-config.yaml"
-        image: otel/opentelemetry-collector-contrib:0.96.0
+      - args: ["--config", "/conf/otel-collector-config.yaml"]
+        image: otel/opentelemetry-collector-contrib:0.105.0
         name: otel-collector
         resources:
           limits:
@@ -46,21 +44,9 @@ spec:
                 apiVersion: v1
                 fieldPath: status.podIP
         volumeMounts:
-        - name: otel-collector-config-vol
-          mountPath: /conf
-#        - name: otel-collector-secrets
-#          mountPath: /secrets
+          - name: otel-collector-conf
+            mountPath: /conf
       volumes:
         - configMap:
             name: otel-collector-conf
-            items:
-              - key: otel-collector-config
-                path: otel-collector-config.yaml
-          name: otel-collector-config-vol
-#        - secret:
-#            name: otel-collector-secrets
-#            items:
-#              - key: cert.pem
-#                path: cert.pem
-#              - key: key.pem
-#                path: key.pem
+          name: otel-collector-conf
