@@ -1,6 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: otel-collector
+namespace: open-telemetry
 resources:
   # agent 的實際用法待研究，官方 otel collector 範例有部署，但是沒有 service 可以進入容器
   - otel-agent-config.yaml
