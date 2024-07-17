@@ -15,7 +15,7 @@ data:
             #endpoint: otel-collector.otel.svc.cluster.local:4317
             endpoint: ${env:MY_POD_IP}:4317
           http:
-            #endpoint: otel-collector.kube-monitor.svc.cluster.local:4318
+            #endpoint: otel-collector.grafana-lab.svc.cluster.local:4318
             endpoint: ${env:MY_POD_IP}:4318
 
     exporters:
@@ -25,13 +25,13 @@ data:
 
       # https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/lokiexporter/README.md
       loki:
-        endpoint: http://loki-gateway.kube-monitor.svc.cluster.local/loki/api/v1/push
+        endpoint: http://loki-gateway.grafana-lab.svc.cluster.local/loki/api/v1/push
         tls:
           insecure: true
 
       # https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/otlpexporter/README.md
       otlp/tempo:
-        endpoint: http://tempo-distributor.kube-monitor.svc.cluster.local:4317
+        endpoint: http://tempo-distributor.grafana-lab.svc.cluster.local:4317
         tls:
           insecure: true
 
