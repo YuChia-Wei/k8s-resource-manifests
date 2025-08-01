@@ -1,3 +1,4 @@
+# ref: https://github.com/rabbitmq/cluster-operator/blob/main/observability/prometheus/monitors/rabbitmq-cluster-operator-podmonitor.yml
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor

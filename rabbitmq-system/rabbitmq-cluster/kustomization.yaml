@@ -4,6 +4,9 @@ namespace: rabbitmq-system
 resources:
   - rabbitmq-cluster.yaml
   - rabbitmq-prometheus-monitor.yaml
+  # 以下兩個是 istio 的網路設定，依需求同步
+  - rabbitmq-istio-gateway.yaml
+  - rabbitmq-istio-vs.yaml
 # configMapGenerator:
 #   - name: rabbitmq-definitions-configmap
 #     files:

@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: rabbitmq-gateway
+  namespace: rabbitmq-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - rabbitmq-system/rabbitmq.local.vm
+      port:
+        name: http
+        number: 80
+        protocol: HTTP

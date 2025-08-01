@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: rabbitmq-vs
+  namespace: rabbitmq-system
+spec:
+  gateways:
+    - rabbitmq-gateway
+  hosts:
+    - rabbitmq.local.vm
+  http:
+    - route:
+        - destination:
+            host: rabbitmq-cluster.rabbitmq-system.svc.cluster.local
+            port:
+              number: 15672
